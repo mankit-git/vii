@@ -1,0 +1,29 @@
+#!/bin/bash
+
+file=`echo $1 | sed "s/^.*\./\./"`
+
+line=`grep 'main' $1 -n | awk -F: '{print $1}'`
+line=$(($line + 2))
+
+if [ -e $1 ]
+then 
+	if [ $file != ".c" ]
+	then
+		vi $1  
+		exit
+	else
+		vi $1 +$line
+		exit
+	fi
+fi
+
+if [ $file != ".c" ]
+then
+	vi $1
+	exit
+fi
+
+cp /home/gec/bin/simple.c $1
+vi $1 +$line
+exit
+
