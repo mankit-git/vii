@@ -2,11 +2,12 @@
 
 file=`echo $1 | sed "s/^.*\./\./"`
 
-line=`grep 'main' $1 -n | awk -F: '{print $1}'`
-line=$(($line + 2))
 
 if [ -e $1 ]
 then 
+	line=`grep 'main' $1 -n | awk -F: '{print $1}'`
+	line=$(($line + 2))
+
 	if [ $file != ".c" ]
 	then
 		vi $1  
@@ -24,6 +25,6 @@ then
 fi
 
 cp /home/gec/bin/simple.c $1
-vi $1 +$line
+vi $1 +14
 exit
 
